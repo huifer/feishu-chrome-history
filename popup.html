@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Chrome Extension</title>
+  <style>
+    body {
+      width: 400px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .input-group {
+      display: flex;
+      gap: 5px;
+    }
+    input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #messageList {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .config-section {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .config-section h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+    .config-item {
+      margin-bottom: 8px;
+    }
+    .config-item label {
+      display: block;
+      margin-bottom: 4px;
+      color: #666;
+    }
+    .config-item input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>My Chrome Extension</h2>
+    </div>
+    <div class="config-section">
+      <h3>配置设置</h3>
+      <div class="config-item">
+        <label for="appId">APPID:</label>
+        <input type="text" id="appId" placeholder="请输入APPID">
+      </div>
+      <div class="config-item">
+        <label for="appSecret">App Secret:</label>
+        <input type="password" id="appSecret" placeholder="请输入App Secret">
+      </div>
+ 
+      <button id="saveConfig">保存配置</button>
+    </div>
+
+    <div class="config-section">
+      <h3>飞书URL解析</h3>
+      <div class="config-item">
+        <label for="feishuUrl">飞书URL:</label>
+        <input type="url" id="feishuUrl" placeholder="请输入飞书文档URL">
+      </div>
+      <div class="config-item">
+        <label>解析结果:</label>
+        <div id="parseResult" style="padding: 8px; background: #f5f5f5; border-radius: 4px;">
+          <div>Base ID: <span id="baseId">-</span></div>
+          <div>Table ID: <span id="tableId">-</span></div>
+        </div>
+      </div>
+      <button id="saveFeishuIds" style="margin-top: 10px;">保存解析结果</button>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
