@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const config = {
       appId: appIdInput.value.trim(),
       appSecret: appSecretInput.value.trim(),
-      apiUrl: apiUrlInput.value.trim()
+     
     };
     
     chrome.storage.local.set({ config }, () => {
