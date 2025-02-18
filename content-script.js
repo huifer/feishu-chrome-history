@@ -39,7 +39,7 @@ async function createBitableRecord(fields) {
 (() => {
     console.log('开始获取 feishuIds 配置信息...');
     // 获取并显示 feishuIds 配置信息
- 
+
 
     // 检查 chrome 对象是否存在
     if (!chrome || !chrome.runtime || !chrome.runtime.sendMessage) {
@@ -54,20 +54,34 @@ async function createBitableRecord(fields) {
 
     chrome.runtime.sendMessage({ action: 'getFeishuIds' }, (response) => {
         if (response.feishuIds) {
-          console.log('获取到的飞书ID:', response.feishuIds);
-          // 在这里处理获取到的飞书ID数据
+            console.log('获取到的飞书ID:', response.feishuIds);
+            // 在这里处理获取到的飞书ID数据
         }
-      });
+    });
+    if (!chrome || !chrome.runtime || !chrome.runtime.sendMessage) {
+        // chrome 扩展 API 尚未加载完成
+        setTimeout(arguments.callee, 100);
+        return;
+    }
+
+
+    const article = new Readability(document.cloneNode(true)).parse();
+    const content = article.textContent.replace(
+        /\s{2,}/g,
+        ' ',
+    );
+
+
     // 获取当前页面URL和标题
     const fields =
-            {
-                'URL': {
-                    link: window.location.href,
-                    text: window.location.href
-                }
-            }
-        ;
-    
+    {
+        '内容': content,
+        'URL': {
+            'link': window.location.href,
+            'text': window.location.href
+        }
+    };
+
     console.log('准备提交的字段数据:', fields);
     // 创建记录
     createBitableRecord(fields)
